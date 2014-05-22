@@ -1,0 +1,14 @@
+<div class="container">
+<div class="engine">
+	<div class="current-number">CURRENT NUMBER</div>
+</div>
+</div>
+<script>
+var socket = io.connect('http://localhost:3000');
+$(document).ready(function() {
+	socket.on('count', function(data) {
+		$('.current-number').html(data.data);
+	});
+});
+
+</script>
