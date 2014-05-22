@@ -1,10 +1,17 @@
-
+<div class="container">
+	<div class="engine ticket" data-ticket="{{ticket}}">
+		<div class="current-number"></div>
+	</div>
+	<div class="ticket-row" ng-repeat = "cols in ticket track by $index">
+		<div class="ticket-col" ng-repeat = "c in cols track by $index">{{c}}</div>
+	</div>
+</div>
 
 <script>
 var socket = io.connect('http://localhost:3000');
+
 $(document).ready(function() {
 	var counter = 1;
-	
 	var max_iterations = 100;
 	var duration = 3000;
 	var interval = setInterval(function() {
@@ -17,18 +24,13 @@ $(document).ready(function() {
 		}
 	}, duration);
 
-	socket.on('testing', function(data) {
+	socket.on('drawNumber', function(data) {
+		document.cookie = "myTicket=" + ($('.engine').attr('data-ticket'));
 		$('.current-number').html(data.data);
 	});
-	console.log($('.ticket').attr('data-ticket'));
+	
 });
 
+
+
 </script>
-<div class="container">
-	<div class="engine ticket" >
-		<div class="current-number">0</div>
-	</div>
-	<div class="ticket-row" ng-repeat = "cols in ticket track by $index">
-		<div class="ticket-col" ng-repeat = "c in cols track by $index">{{c}}</div>
-	</div>
-</div>

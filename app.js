@@ -12,7 +12,6 @@ var socketio = require('socket.io');
 var fs = require('fs');
 var app = express();
 var _ = require('underscore');
-var mGroups = require("./custom_modules/groups");
 var $ = require("jquery");
 // all environments
 app.set('port', process.env.PORT || 3000);

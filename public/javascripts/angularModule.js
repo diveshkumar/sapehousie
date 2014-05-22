@@ -28,7 +28,7 @@ AngularApp.controller('SplashController', function($scope) {
   $scope.path = '/#/game';
 });
 // Game Screen controller.
-AngularApp.controller('GameController', function($scope, $http) {
+AngularApp.controller('GameController', function($scope, $http, $window) {
   var labels = {
     playButton: 'Join the Game'
   };
@@ -37,7 +37,11 @@ AngularApp.controller('GameController', function($scope, $http) {
 
   $http.get('/api/game/ticket').success(function(data) {
     $scope.ticket = data;
+    var strData = JSON.stringify(data);
+    $window.localStorage.setItem('myTicket', strData);
   });
+
+
 });
 // Game Engine to generate next number
 AngularApp.controller('EngineController', function($scope, $http) {
@@ -46,8 +50,4 @@ AngularApp.controller('EngineController', function($scope, $http) {
   };
   $scope.labels = labels;
   $scope.path = '/#/game';
-
-  $http.get('/api/game/ticket').success(function(data) {
-    $scope.ticket = data;
-  });
 });

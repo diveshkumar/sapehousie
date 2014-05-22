@@ -4,11 +4,16 @@
 </div>
 </div>
 <script>
+
 var socket = io.connect('http://localhost:3000');
 $(document).ready(function() {
-	socket.on('count', function(data) {
-		$('.current-number').html(data.data);
+	var myTicket = window.localStorage.myTicket || "[]";
+	socket.emit('currentTicket', myTicket);
+
+	socket.on('anotherTicket', function(data) {
+		$('.container').append(data.ticketData);
 	});
+
 });
 
 </script>

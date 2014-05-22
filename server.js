@@ -12,7 +12,6 @@ var io = socketio.listen(server);
 var clientCount = 0;
 io.sockets.on("connection", function(socket) {
   socket.on("connect", function() {
-    console.log('Connected');
     clientCount++;
   });
   socket.on("disconnect", function() {
@@ -22,11 +21,11 @@ io.sockets.on("connection", function(socket) {
   var len = numbers.length;
 
   socket.on('send', function(data) {
-    io.sockets.emit('testing', {data: numbers.pop(), total: numbers.length});
+    io.sockets.emit('drawNumber', {data: numbers.pop(), total: numbers.length});
   });
 
-  socket.on('ticket', function(data) {
-    console.log(data);
+  socket.on('currentTicket', function(data) {
+    io.sockets.emit('anotherTicket', {ticketData: data});
   });
 
 
